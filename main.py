@@ -4,26 +4,23 @@ from config import TOKEN
 import os
 
 # Configuração do bot
-intents = discord.Intents.all()
-intents.message_content = True
-intents.guilds = True
+COGS = ("cogs.tisUser",)
+INTENTS = discord.Intents.default()
+INTENTS.message_content = True
 
-bot = commands.Bot(command_prefix='.', intents=intents)
+bot = commands.Bot(command_prefix='.', intents=INTENTS)
 
-def carregar_cogs():
-    for arquivo in os.listdir('cogs'):
-        if arquivo.endswith('.py'):
-            bot.load_extension(f"cogs.{arquivo[:-3]}")
-            print(f'Cog {arquivo} carregado.')
+# def carregar_cogs():
+#     for arquivo in os.listdir('cogs'):
+#         if arquivo.endswith('.py'):
+#             bot.load_extension(f"cogs.{arquivo[:-3]}")
+#             print(f'Cog {arquivo} carregado.')
 
 @bot.event
-async def on_ready():
-    try:
-        carregar_cogs()
-        await bot.tree.sync()  # Sincronizar os comandos de interação (slash commands)
-        print(f'Bot conectado como {bot.user}')
-    except:
-        print("erro ao carregar")
+async def setup_hook():
+    # carregar_cogs()
+    for cog in COGS:
+        await bot.load_extension(cog)
 bot.run(TOKEN)
 
 

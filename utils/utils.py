@@ -4,7 +4,7 @@ from pymongo import MongoClient
 client = MongoClient('mongodb://localhost:27017/')
 
 # Criar/Selecionar o banco de dados
-db = client['rpg_database']
+db = client['tis-rpg_database']
 
 # Criar/Selecionar a coleção
 rpg_collection = db['rpgs']
@@ -12,7 +12,9 @@ rpg_collection = db['rpgs']
 # Inserir um documento para garantir que a coleção e o banco de dados sejam criados
 rpg_collection.insert_one({
     'nome_rpg': 'Exemplo RPG',
-    'nome_chat': 'exemplo-rpg',
+    'cenas': [{'cena1': []},],
+    'template_fichas': 12314,
+    'chat_gameplay': False,
     'mestre': 123456789
 })
 

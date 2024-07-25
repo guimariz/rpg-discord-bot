@@ -119,6 +119,15 @@ class tisUser(commands.Cog):
         """
         await interaction.response.send_message(comandos)
 
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        if message.author == self.bot.user:
+            return
+        
+        if not message.content.startswith('.') or message.content.split()[0][1:] not in ['tis', 'mestrar', 'info']:
+            await message.delete()
+            return
+
 async def setup(bot):
     await bot.add_cog(tisUser(bot))
 

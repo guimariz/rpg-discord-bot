@@ -10,11 +10,6 @@ INTENTS.message_content = True
 
 bot = commands.Bot(command_prefix='.', intents=INTENTS)
 
-# def carregar_cogs():
-#     for arquivo in os.listdir('cogs'):
-#         if arquivo.endswith('.py'):
-#             bot.load_extension(f"cogs.{arquivo[:-3]}")
-#             print(f'Cog {arquivo} carregado.')
 
 @bot.event
 async def setup_hook():
@@ -23,6 +18,13 @@ async def setup_hook():
         await bot.load_extension(cog)
 bot.run(TOKEN)
 
+
+
+# def carregar_cogs():
+#     for arquivo in os.listdir('cogs'):
+#         if arquivo.endswith('.py'):
+#             bot.load_extension(f"cogs.{arquivo[:-3]}")
+#             print(f'Cog {arquivo} carregado.')
 
 # @bot.command(name='tis', description='Mostra os comandos disponíveis')
 # async def tis(ctx: commands.Context):
